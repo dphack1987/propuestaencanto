@@ -105,6 +105,7 @@ export default function Chatbot() {
         whileHover={{ scale: 1.06 }}
         whileTap={{ scale: 0.94 }}
         aria-label={open ? "Cerrar chat" : "Abrir chat"}
+        data-tour="chatbot"
         className="fixed bottom-6 left-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-forest-950 text-gold-400 shadow-2xl shadow-black/30 ring-1 ring-white/15 transition-colors hover:bg-forest-800"
       >
         {open ? <X size={24} /> : <Bot size={24} />}

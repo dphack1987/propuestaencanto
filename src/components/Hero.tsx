@@ -48,6 +48,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          data-tour="hero"
           className="mt-6 max-w-4xl font-display text-[13vw] font-medium leading-[0.95] tracking-tight text-cream sm:text-7xl lg:text-8xl"
         >
           Donde el lujo

@@ -95,7 +95,10 @@ export default function Reserva() {
 
           {/* Widget */}
           <Reveal delay={0.15}>
-            <div className="rounded-[2rem] bg-cream p-8 text-forest-950 shadow-2xl lg:p-10">
+            <div
+              data-tour="reserva-widget"
+              className="rounded-[2rem] bg-cream p-8 text-forest-950 shadow-2xl lg:p-10"
+            >
               <div className="flex items-center gap-3">
                 <CalendarDays size={20} className="text-terra-500" />
                 <h3 className="font-display text-2xl font-medium">

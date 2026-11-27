@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   BadgePercent,
@@ -9,6 +10,7 @@ import {
   CalendarCheck,
   ChefHat,
   CreditCard,
+  Globe,
   LayoutDashboard,
   MessageCircle,
   Smartphone,
@@ -26,6 +28,7 @@ type Feature = {
   href?: string;
   external?: boolean;
   chatbot?: boolean;
+  analytics?: boolean;
 };
 
 const FEATURES: Feature[] = [
@@ -112,7 +115,66 @@ const FEATURES: Feature[] = [
     demo: "Parte del sistema de correos transaccionales y la app móvil.",
     action: "Próximamente",
   },
+  {
+    icon: Globe,
+    title: "Analítica de visitantes",
+    description:
+      "Sabes quién visita tu página: países de origen, fuentes de tráfico (Google, Instagram, Booking), páginas más vistas y en qué punto abandonan la reserva.",
+    demo: "Con estos datos decides dónde invertir en publicidad y qué contenido convierte más.",
+    action: "Ver ejemplo",
+    live: true,
+    analytics: true,
+  },
 ];
+
+const ANALYTICS_MOCK = {
+  stats: [
+    { label: "Visitantes este mes", value: "12.480" },
+    { label: "Países de origen", value: "34" },
+    { label: "Conversión a reserva", value: "4.2%" },
+    { label: "Consultas por WhatsApp", value: "386" },
+    { label: "Chats atendidos por bot", value: "1.204" },
+    { label: "Ingresos atribuidos", value: "$18.4M" },
+  ],
+  countries: [
+    { name: "Colombia", pct: 42 },
+    { name: "Estados Unidos", pct: 23 },
+    { name: "España", pct: 14 },
+    { name: "México", pct: 9 },
+    { name: "Otros", pct: 12 },
+  ],
+  sources: [
+    { name: "Google (búsqueda)", pct: 34 },
+    { name: "Instagram", pct: 27 },
+    { name: "Booking.com", pct: 15 },
+    { name: "Referidos / WhatsApp", pct: 14 },
+    { name: "Directo", pct: 10 },
+  ],
+  funnel: [
+    { label: "Visitas a la página", value: 100, count: "12.480" },
+    { label: "Vieron tarifas", value: 68, count: "8.486" },
+    { label: "Iniciaron reserva", value: 31, count: "3.869" },
+    { label: "Escribieron por WhatsApp", value: 12, count: "1.497" },
+    { label: "Reserva confirmada", value: 4.2, count: "524" },
+  ],
+  topContent: [
+    { name: "Casa completa", views: "3.912" },
+    { name: "Suite boutique", views: "3.204" },
+    { name: "Chef privado", views: "1.847" },
+    { name: "Beneficios / descuentos", views: "1.203" },
+  ],
+  devices: [
+    { name: "Móvil", pct: 71 },
+    { name: "Escritorio", pct: 22 },
+    { name: "Tablet", pct: 7 },
+  ],
+  chatbotTopics: [
+    { topic: "Precios y tarifas", queries: 342 },
+    { topic: "Disponibilidad", queries: 287 },
+    { topic: "Mascotas", queries: 96 },
+    { topic: "Beneficios", queries: 88 },
+  ],
+};
 
 const FLOW = [
   {
@@ -138,10 +200,10 @@ const FLOW = [
 ];
 
 export default function Funciones() {
-  const [chatOpen, setChatOpen] = useState(false);
+  const [showAnalytics, setShowAnalytics] = useState(false);
 
   return (
-    <section className="bg-forest-950 py-24 text-cream lg:py-32">
+    <section id="funciones" className="bg-forest-950 py-24 text-cream lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="text-center">
           <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-gold-400">
@@ -197,6 +259,14 @@ export default function Funciones() {
                     {f.action}
                     <ArrowRight size={14} />
                   </button>
+                ) : f.analytics ? (
+                  <button
+                    onClick={() => setShowAnalytics((v) => !v)}
+                    className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-gold-500/40 px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.15em] text-gold-400 transition-all hover:bg-gold-500 hover:text-forest-950"
+                  >
+                    {showAnalytics ? "Ocultar panel" : f.action}
+                    <ArrowRight size={14} />
+                  </button>
                 ) : f.href ? (
                   <a
                     href={f.href}
@@ -217,6 +287,194 @@ export default function Funciones() {
             </Reveal>
           ))}
         </div>
+
+        {/* Panel de analítica — vista previa */}
+        {showAnalytics && (
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-14 overflow-hidden rounded-[2rem] border border-gold-500/30 bg-white/[0.04]"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 px-8 py-5">
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-gold-400">
+                  Panel de inteligencia del negocio
+                </p>
+                <h3 className="mt-1 font-display text-2xl font-medium">
+                  Métricas de mercadeo
+                </h3>
+              </div>
+              <span className="rounded-full bg-terra-500/20 px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-terra-400">
+                Datos de ejemplo
+              </span>
+            </div>
+
+            {/* KPIs */}
+            <div className="grid grid-cols-2 gap-px bg-white/10 sm:grid-cols-3 lg:grid-cols-6">
+              {ANALYTICS_MOCK.stats.map((s) => (
+                <div key={s.label} className="bg-forest-950 px-5 py-4">
+                  <p className="font-display text-2xl font-medium text-gold-400">
+                    {s.value}
+                  </p>
+                  <p className="mt-1 text-[10px] uppercase tracking-wider text-cream/50">
+                    {s.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid gap-px bg-white/10 lg:grid-cols-2">
+              {/* Países */}
+              <div className="bg-forest-950 p-8">
+                <h4 className="text-sm font-bold uppercase tracking-[0.2em] text-cream/60">
+                  Visitantes por país
+                </h4>
+                <div className="mt-5 space-y-3">
+                  {ANALYTICS_MOCK.countries.map((c) => (
+                    <div key={c.name}>
+                      <div className="flex justify-between text-xs">
+                        <span className="text-cream/80">{c.name}</span>
+                        <span className="text-gold-400">{c.pct}%</span>
+                      </div>
+                      <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-white/10">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${c.pct}%` }}
+                          transition={{ duration: 0.9, ease: "easeOut" }}
+                          className="h-full rounded-full bg-gradient-to-r from-forest-600 to-gold-500"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Fuentes */}
+              <div className="bg-forest-950 p-8">
+                <h4 className="text-sm font-bold uppercase tracking-[0.2em] text-cream/60">
+                  Fuentes de tráfico
+                </h4>
+                <div className="mt-5 space-y-3">
+                  {ANALYTICS_MOCK.sources.map((s) => (
+                    <div key={s.name}>
+                      <div className="flex justify-between text-xs">
+                        <span className="text-cream/80">{s.name}</span>
+                        <span className="text-gold-400">{s.pct}%</span>
+                      </div>
+                      <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-white/10">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${s.pct}%` }}
+                          transition={{ duration: 0.9, ease: "easeOut" }}
+                          className="h-full rounded-full bg-gradient-to-r from-terra-500 to-terra-400"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Embudo */}
+              <div className="bg-forest-950 p-8">
+                <h4 className="text-sm font-bold uppercase tracking-[0.2em] text-cream/60">
+                  Embudo de conversión
+                </h4>
+                <div className="mt-5 space-y-3">
+                  {ANALYTICS_MOCK.funnel.map((f, i) => (
+                    <div key={f.label} className="flex items-center gap-4">
+                      <span className="w-44 shrink-0 text-xs text-cream/70">
+                        {f.label}
+                      </span>
+                      <div className="h-5 flex-1 overflow-hidden rounded-md bg-white/10">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${Math.max(f.value, 2)}%` }}
+                          transition={{
+                            duration: 0.9,
+                            delay: i * 0.1,
+                            ease: "easeOut",
+                          }}
+                          className="flex h-full items-center justify-end rounded-md bg-gradient-to-r from-forest-600 to-forest-500 px-2"
+                        >
+                          <span className="text-[10px] font-bold text-cream/80">
+                            {f.count}
+                          </span>
+                        </motion.div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Contenido + dispositivos + chatbot */}
+              <div className="space-y-px bg-white/10">
+                <div className="bg-forest-950 p-8">
+                  <h4 className="text-sm font-bold uppercase tracking-[0.2em] text-cream/60">
+                    Contenido más visto
+                  </h4>
+                  <ul className="mt-4 space-y-2.5">
+                    {ANALYTICS_MOCK.topContent.map((c, i) => (
+                      <li
+                        key={c.name}
+                        className="flex items-center justify-between text-sm"
+                      >
+                        <span className="flex items-center gap-3 text-cream/75">
+                          <span className="font-display text-gold-500/60">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          {c.name}
+                        </span>
+                        <span className="text-xs text-cream/45">
+                          {c.views} vistas
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="grid grid-cols-2 gap-px bg-white/10">
+                  <div className="bg-forest-950 p-6">
+                    <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-cream/60">
+                      Dispositivos
+                    </h4>
+                    <div className="mt-4 space-y-2.5">
+                      {ANALYTICS_MOCK.devices.map((d) => (
+                        <div
+                          key={d.name}
+                          className="flex justify-between text-xs text-cream/75"
+                        >
+                          <span>{d.name}</span>
+                          <span className="text-gold-400">{d.pct}%</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="bg-forest-950 p-6">
+                    <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-cream/60">
+                      Chatbot: temas
+                    </h4>
+                    <ul className="mt-4 space-y-2">
+                      {ANALYTICS_MOCK.chatbotTopics.map((t) => (
+                        <li
+                          key={t.topic}
+                          className="flex justify-between text-xs text-cream/75"
+                        >
+                          <span className="truncate pr-2">{t.topic}</span>
+                          <span className="text-gold-400">{t.queries}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p className="border-t border-white/10 px-8 py-4 text-center text-[11px] text-cream/40">
+              Vista previa con datos de ejemplo — en producción cada métrica se
+              alimenta en tiempo real desde la página.
+            </p>
+          </motion.div>
+        )}
 
         {/* Flujo de reserva */}
         <Reveal delay={0.1}>
@@ -243,6 +501,54 @@ export default function Funciones() {
                       className="absolute -right-4 top-1/2 hidden -translate-y-1/2 text-gold-500/50 lg:block"
                     />
                   )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Por qué trabajar con nosotros */}
+        <Reveal delay={0.1}>
+          <div className="mt-24">
+            <div className="text-center">
+              <h3 className="font-display text-2xl font-medium lg:text-3xl">
+                Por qué trabajar con nosotros
+              </h3>
+              <p className="mx-auto mt-3 max-w-xl text-sm text-cream/55">
+                No entregamos una página y nos vamos — construimos un sistema
+                que trabaja para tu negocio todos los días.
+              </p>
+            </div>
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  title: "Conocemos tu negocio",
+                  text: "La maqueta usa tus datos reales: tarifas, suites, beneficios y WhatsApp. Nada de plantillas genéricas.",
+                },
+                {
+                  title: "Ventas 24/7 sin personal extra",
+                  text: "El chatbot y las reservas automáticas atienden huéspedes de cualquier país a cualquier hora.",
+                },
+                {
+                  title: "Datos que valen dinero",
+                  text: "Cada visita, consulta y reserva queda registrada: sabes qué países te visitan, qué servicios buscan y dónde se pierde la venta.",
+                },
+                {
+                  title: "Crece contigo",
+                  text: "Empieza con la web y escala a pagos en línea, app móvil y panel administrativo sin rehacer nada.",
+                },
+              ].map((v, i) => (
+                <div
+                  key={v.title}
+                  className="rounded-3xl border border-gold-500/25 bg-gradient-to-b from-gold-500/[0.08] to-transparent p-7"
+                >
+                  <span className="font-display text-3xl font-light text-gold-500/50">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h4 className="mt-3 font-semibold text-cream">{v.title}</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-cream/55">
+                    {v.text}
+                  </p>
                 </div>
               ))}
             </div>

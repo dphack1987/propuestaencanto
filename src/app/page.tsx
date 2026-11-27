@@ -11,6 +11,7 @@ import Funciones from "@/components/Funciones";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Chatbot from "@/components/Chatbot";
+import TourGuide from "@/components/TourGuide";
 
 export default function Home() {
   return (
@@ -30,6 +31,7 @@ export default function Home() {
       <Footer />
       <WhatsAppButton />
       <Chatbot />
+      <TourGuide />
     </>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, Sparkles, X } from "lucide-react";
 import { InstagramIcon } from "./icons";
 import { SITE } from "@/lib/data";
 
@@ -33,7 +33,17 @@ export default function Navbar() {
           : "bg-transparent py-6"
       }`}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-10">
+      {!scrolled && (
+        <div className="flex items-center justify-center gap-2.5 bg-terra-500 px-4 py-2.5 text-center">
+          <Sparkles size={13} className="shrink-0 text-white" />
+          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white sm:text-[11px]">
+            Maqueta interactiva de propuesta — explora cómo se verá tu página y
+            qué funciones incluirá
+          </p>
+          <Sparkles size={13} className="shrink-0 text-white" />
+        </div>
+      )}
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
         <a href="#" className="flex items-baseline gap-2">
           <span className="font-display text-2xl font-semibold tracking-tight text-cream">
             Hotel <em className="text-gold-400 not-italic font-light">Yanuba</em>
