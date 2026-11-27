@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Instagram, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { InstagramIcon } from "./icons";
 import { SITE } from "@/lib/data";
 
 const LINKS = [
@@ -60,7 +61,7 @@ export default function Navbar() {
             aria-label="Instagram"
             className="text-cream/70 hover:text-gold-400 transition-colors"
           >
-            <Instagram size={18} />
+            <InstagramIcon size={18} />
           </a>
           <a
             href="#reservas"
