@@ -9,10 +9,12 @@ import {
   Bot,
   CalendarCheck,
   ChefHat,
+  Code2,
   CreditCard,
   Globe,
   LayoutDashboard,
   MessageCircle,
+  SearchCheck,
   Smartphone,
 } from "lucide-react";
 import { SITE } from "@/lib/data";
@@ -124,6 +126,16 @@ const FEATURES: Feature[] = [
     action: "Ver ejemplo",
     live: true,
     analytics: true,
+  },
+  {
+    icon: SearchCheck,
+    title: "SEO técnico avanzado",
+    description:
+      "Posicionamiento real en Google: velocidad extrema, datos estructurados de hotel, SEO local y estrategia de contenido por intención de búsqueda.",
+    demo: "A diferencia de la mayoría, nuestro enfoque es técnico y de resultados medibles — no solo 'poner palabras clave'.",
+    action: "Ver detalle",
+    live: true,
+    href: "#seo",
   },
 ];
 
@@ -507,6 +519,79 @@ export default function Funciones() {
           </div>
         </Reveal>
 
+        {/* SEO avanzado */}
+        <Reveal delay={0.1}>
+          <div id="seo" className="mt-24 scroll-mt-28">
+            <div className="text-center">
+              <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-gold-400">
+                Ventaja competitiva
+              </p>
+              <h3 className="mt-3 font-display text-2xl font-medium lg:text-3xl">
+                Un SEO que sí posiciona — y que puedes medir
+              </h3>
+              <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-cream/55">
+                La mayoría de las páginas solo 'ponen palabras clave'. Nosotros
+                trabajamos el posicionamiento desde la parte técnica, la
+                estructura de datos y la intención de búsqueda real del
+                viajero.
+              </p>
+            </div>
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                {
+                  title: "SEO técnico de alto nivel",
+                  items: [
+                    "Core Web Vitals perfectos — carga en milisegundos",
+                    "Datos estructurados schema.org/Hotel para Google",
+                    "Sitemap, canonical, robots y metadatos OG optimizados",
+                    "Arquitectura de URLs y enlazado interno inteligente",
+                  ],
+                },
+                {
+                  title: "SEO local que vende",
+                  items: [
+                    "Optimización para 'hotel cerca de mí' y búsquedas por zona",
+                    "Google Business Profile + mapas integrados",
+                    "Reseñas y calificaciones visibles en los resultados",
+                    "Presencia en búsquedas de Quimbaya, Filandia y Panaca",
+                  ],
+                },
+                {
+                  title: "Contenido con intención",
+                  items: [
+                    "Guías y blog del Eje Cafetero que atraen viajeros",
+                    "Keywords por etapa del viaje: soñar → comparar → reservar",
+                    "Estrategia de enlaces (backlinks) locales y de turismo",
+                    "Medición en Search Console: posiciones, CTR y conversión",
+                  ],
+                },
+              ].map((col) => (
+                <div
+                  key={col.title}
+                  className="rounded-3xl border border-white/10 bg-white/[0.03] p-7"
+                >
+                  <h4 className="font-semibold text-cream">{col.title}</h4>
+                  <ul className="mt-4 space-y-2.5">
+                    {col.items.map((it) => (
+                      <li
+                        key={it}
+                        className="flex items-start gap-2.5 text-sm leading-relaxed text-cream/60"
+                      >
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-400" />
+                        {it}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-relaxed text-cream/50">
+              Una solución digital práctica y adaptable: medimos cada resultado
+              y ajustamos la estrategia según lo que funcione para tu negocio.
+            </p>
+          </div>
+        </Reveal>
+
         {/* Por qué trabajar con nosotros */}
         <Reveal delay={0.1}>
           <div className="mt-24">
@@ -551,6 +636,25 @@ export default function Funciones() {
                   </p>
                 </div>
               ))}
+            </div>
+
+            {/* Desarrollo propio */}
+            <div className="mt-8 flex flex-col items-center gap-4 rounded-[2rem] border border-gold-500/40 bg-gradient-to-r from-gold-500/10 via-gold-500/5 to-transparent px-8 py-10 text-center lg:flex-row lg:text-left">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gold-500/20">
+                <Code2 size={26} className="text-gold-400" />
+              </div>
+              <div>
+                <h4 className="font-display text-xl font-medium text-cream lg:text-2xl">
+                  Desarrollo 100% propio, desde cero
+                </h4>
+                <p className="mt-2 max-w-3xl text-sm leading-relaxed text-cream/60">
+                  No usamos maquetas ni plantillas de terceros: todo el sistema
+                  se programa a medida con las técnicas más avanzadas de
+                  ingeniería de software — frontend de última generación y
+                  backend en Python puro — para que cada función sea exactamente
+                  lo que tu negocio necesita.
+                </p>
+              </div>
             </div>
           </div>
         </Reveal>

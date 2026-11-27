@@ -37,6 +37,9 @@ export type StayOption = {
   image: string;
   features: string[];
   badge?: string;
+  rating?: number;
+  reviews?: number;
+  guestFavorite?: boolean;
 };
 
 export const STAY_OPTIONS: StayOption[] = [
@@ -54,6 +57,9 @@ export const STAY_OPTIONS: StayOption[] = [
       "Desayuno incluido",
       "Zona BBQ",
     ],
+    rating: 4.9,
+    reviews: 128,
+    guestFavorite: true,
   },
   {
     id: "casa-completa",
@@ -71,6 +77,8 @@ export const STAY_OPTIONS: StayOption[] = [
       "Seguridad privada",
     ],
     badge: "Exclusividad total",
+    rating: 5.0,
+    reviews: 34,
   },
 ];
 
@@ -82,6 +90,8 @@ export type SuiteType = {
   capacity: string;
   ideal: string;
   image: string;
+  rating?: number;
+  reviews?: number;
 };
 
 export const SUITE_TYPES: SuiteType[] = [
@@ -94,6 +104,8 @@ export const SUITE_TYPES: SuiteType[] = [
     capacity: "2 a 4 personas",
     ideal: "Parejas",
     image: PHOTOS.suiteBoutique,
+    rating: 4.8,
+    reviews: 96,
   },
   {
     name: "Suites Familiares",
@@ -104,6 +116,8 @@ export const SUITE_TYPES: SuiteType[] = [
     capacity: "Hasta 6 personas",
     ideal: "Familias y grupos",
     image: PHOTOS.suiteFamiliar,
+    rating: 4.9,
+    reviews: 54,
   },
 ];
 

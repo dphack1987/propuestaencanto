@@ -1,5 +1,13 @@
 import Image from "next/image";
-import { ArrowUpRight, BedDouble, Crown, Users } from "lucide-react";
+import {
+  ArrowUpRight,
+  BedDouble,
+  Crown,
+  Heart,
+  MapPin,
+  Star,
+  Users,
+} from "lucide-react";
 import { RATES, SITE, STAY_OPTIONS, SUITE_TYPES } from "@/lib/data";
 import Reveal from "./Reveal";
 
@@ -32,8 +40,9 @@ export default function Alojamiento() {
         <div className="mt-16 grid gap-8 lg:grid-cols-2">
           {STAY_OPTIONS.map((opt, i) => (
             <Reveal key={opt.id} delay={i * 0.15}>
-              <article className="group lift relative overflow-hidden rounded-[2rem] bg-forest-950 text-cream">
-                <div className="img-zoom relative h-80 overflow-hidden">
+              <article className="group lift flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-forest-950/5">
+                {/* Imagen estilo Booking/Airbnb */}
+                <div className="img-zoom relative h-72 overflow-hidden">
                   <Image
                     src={opt.image}
                     alt={opt.name}
@@ -41,46 +50,81 @@ export default function Alojamiento() {
                     sizes="(min-width: 1024px) 45vw, 100vw"
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/30 to-transparent" />
+                  <button
+                    aria-label="Guardar"
+                    className="absolute right-4 top-4 rounded-full bg-white/90 p-2.5 shadow-md backdrop-blur transition-colors hover:text-terra-500"
+                  >
+                    <Heart size={17} className="text-forest-950/60" />
+                  </button>
+                  {opt.guestFavorite && (
+                    <span className="absolute left-4 top-4 rounded-full bg-terra-500 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white shadow-md">
+                      Favorito de huéspedes
+                    </span>
+                  )}
                   {opt.badge && (
-                    <span className="absolute left-6 top-6 rounded-full bg-gold-500 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.15em] text-forest-950">
+                    <span className="absolute left-4 top-4 rounded-full bg-forest-950 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-gold-400 shadow-md">
                       {opt.badge}
                     </span>
                   )}
-                  <div className="absolute inset-x-0 bottom-0 p-8">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-gold-400">
-                      Desde {fmt(opt.priceFrom)} / noche
-                    </p>
-                    <h3 className="mt-2 font-display text-4xl font-medium">
-                      {opt.name}
-                    </h3>
-                  </div>
+                  {/* Badge de rating estilo Booking */}
+                  {opt.rating && (
+                    <div className="absolute bottom-4 right-4 flex items-center gap-1.5 rounded-lg bg-white/95 px-2.5 py-1.5 shadow-md backdrop-blur">
+                      <Star size={13} className="fill-gold-500 text-gold-500" />
+                      <span className="text-sm font-bold text-forest-950">
+                        {opt.rating.toFixed(1)}
+                      </span>
+                      <span className="text-xs text-forest-950/50">
+                        ({opt.reviews})
+                      </span>
+                    </div>
+                  )}
                 </div>
-                <div className="p-8">
-                  <p className="leading-relaxed text-cream/65">
+
+                <div className="flex flex-1 flex-col p-7">
+                  <h3 className="font-display text-2xl font-medium text-forest-950">
+                    {opt.name}
+                  </h3>
+                  <p className="mt-1 flex items-center gap-1.5 text-xs text-forest-950/50">
+                    <MapPin size={12} />
+                    {SITE.location}
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-forest-950/65">
                     {opt.description}
                   </p>
-                  <ul className="mt-6 grid grid-cols-2 gap-3">
-                    {opt.features.map((f) => (
-                      <li
+
+                  {/* Amenidades rápidas */}
+                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5">
+                    {opt.features.slice(0, 3).map((f) => (
+                      <span
                         key={f}
-                        className="flex items-center gap-2 text-sm text-cream/75"
+                        className="flex items-center gap-1.5 text-xs text-forest-950/60"
                       >
-                        <BedDouble size={14} className="text-gold-400" />
+                        <BedDouble size={12} className="text-forest-600" />
                         {f}
-                      </li>
+                      </span>
                     ))}
-                  </ul>
-                  <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-6">
-                    <span className="flex items-center gap-2 text-sm text-cream/60">
-                      <Users size={16} className="text-gold-400" />
-                      {opt.capacity}
-                    </span>
+                  </div>
+
+                  <div className="mt-auto flex items-end justify-between border-t border-forest-950/10 pt-5">
+                    <div>
+                      <p className="text-[11px] uppercase tracking-[0.15em] text-forest-950/45">
+                        Desde
+                      </p>
+                      <p className="font-display text-2xl font-semibold text-forest-950">
+                        ${opt.priceFrom.toLocaleString("es-CO")}
+                        <span className="ml-1 text-xs font-normal text-forest-950/45">
+                          / noche
+                        </span>
+                      </p>
+                      <p className="mt-0.5 flex items-center gap-1 text-[11px] text-forest-950/45">
+                        <Users size={11} /> {opt.capacity}
+                      </p>
+                    </div>
                     <a
                       href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(`Hola, quiero reservar: ${opt.name} en Casa Yanuba`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group/btn inline-flex items-center gap-2 rounded-full bg-gold-500 px-6 py-3 text-[12px] font-bold uppercase tracking-[0.15em] text-forest-950 transition-all hover:bg-gold-400"
+                      className="group/btn inline-flex items-center gap-2 rounded-full bg-forest-950 px-6 py-3 text-[12px] font-bold uppercase tracking-[0.15em] text-gold-400 transition-all hover:bg-forest-800"
                     >
                       Reservar
                       <ArrowUpRight
@@ -125,13 +169,22 @@ export default function Alojamiento() {
                     <p className="mt-3 text-sm leading-relaxed text-forest-950/65">
                       {s.description}
                     </p>
-                    <div className="mt-4 flex flex-wrap gap-2">
+                    <div className="mt-4 flex flex-wrap items-center gap-2">
                       <span className="rounded-full bg-forest-950/5 px-3 py-1 text-xs text-forest-950/70">
                         {s.capacity}
                       </span>
                       <span className="rounded-full bg-gold-500/15 px-3 py-1 text-xs font-semibold text-coffee-700">
                         Ideal para {s.ideal}
                       </span>
+                      {s.rating && (
+                        <span className="flex items-center gap-1 rounded-full bg-forest-950/5 px-3 py-1 text-xs font-semibold text-forest-950">
+                          <Star
+                            size={11}
+                            className="fill-gold-500 text-gold-500"
+                          />
+                          {s.rating} ({s.reviews})
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
