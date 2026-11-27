@@ -7,6 +7,7 @@ import Alojamiento from "@/components/Alojamiento";
 import Galeria from "@/components/Galeria";
 import Reserva from "@/components/Reserva";
 import Testimonios from "@/components/Testimonios";
+import Funciones from "@/components/Funciones";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Chatbot from "@/components/Chatbot";
@@ -24,6 +25,7 @@ export default function Home() {
         <Galeria />
         <Reserva />
         <Testimonios />
+        <Funciones />
       </main>
       <Footer />
       <WhatsAppButton />

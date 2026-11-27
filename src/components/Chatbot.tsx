@@ -76,6 +76,12 @@ export default function Chatbot() {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const openChat = () => setOpen(true);
+    window.addEventListener("open-chatbot", openChat);
+    return () => window.removeEventListener("open-chatbot", openChat);
+  }, []);
+
+  useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [msgs, typing, open]);
 
