@@ -84,32 +84,32 @@ const FEATURES: Feature[] = [
     icon: CreditCard,
     title: "Pago en línea",
     description:
-      "Próximamente: pasarela de pagos (PSE, tarjetas, Nequi) con confirmación automática por email.",
-    demo: "Fase 2 del proyecto — listo para integrar Mercado Pago o ePayco.",
+      "Pago en línea con tarjeta, PSE o Nequi, confirmación automática por email y recibo digital.",
+    demo: "Se activa con la pasarela de pagos — Mercado Pago o ePayco.",
     action: "Próximamente",
   },
   {
     icon: Smartphone,
     title: "App móvil",
     description:
-      "Próximamente: la misma experiencia en iOS y Android con check-in digital y notificaciones.",
-    demo: "Fase 3 — el sitio ya es instalable como PWA mientras tanto.",
+      "La misma experiencia en iOS y Android: reservas, check-in digital con QR y notificaciones push.",
+    demo: "El sitio ya es instalable como app (PWA) mientras llega la versión nativa.",
     action: "Próximamente",
   },
   {
     icon: LayoutDashboard,
     title: "Panel del hotel",
     description:
-      "Próximamente: calendario de ocupación, gestión de reservas y reportes de ingresos.",
-    demo: "Fase 4 — administración completa sin programador.",
+      "Administración completa: calendario de ocupación, gestión de reservas y reportes de ingresos.",
+    demo: "Edición de tarifas y contenido sin necesidad de programador.",
     action: "Próximamente",
   },
   {
     icon: Bell,
     title: "Notificaciones",
     description:
-      "Recordatorios de reserva, check-in digital con QR y ofertas para huéspedes frecuentes.",
-    demo: "Parte de la app y el sistema de correos transaccionales.",
+      "Recordatorios de reserva, check-in digital con QR y ofertas exclusivas para huéspedes.",
+    demo: "Parte del sistema de correos transaccionales y la app móvil.",
     action: "Próximamente",
   },
 ];
@@ -156,7 +156,8 @@ export default function Funciones() {
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-cream/55">
             Cada función de la maqueta es real y funciona hoy. Las marcadas como
-            &quot;próximamente&quot; son las fases 2 a 4 del proyecto.
+            &quot;próximamente&quot; se activan con las siguientes etapas del
+            sistema.
           </p>
         </Reveal>
 
@@ -175,7 +176,7 @@ export default function Funciones() {
                     </span>
                   ) : (
                     <span className="rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-cream/50">
-                      Fase {i < 5 ? 2 : 3}
+                      Próximamente
                     </span>
                   )}
                 </div>
