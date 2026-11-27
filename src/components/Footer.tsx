@@ -165,7 +165,7 @@ export default function Footer() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-forest-950 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 pb-6 text-[11px] uppercase tracking-[0.2em] text-cream/50 sm:flex-row lg:px-10">
-          <span>© {new Date().getFullYear()} {SITE.name} — {SITE.descriptor}</span>
+          <span>© 2026 {SITE.name} — {SITE.descriptor}</span>
           <span>Quimbaya · Quindío · Colombia</span>
         </div>
       </div>

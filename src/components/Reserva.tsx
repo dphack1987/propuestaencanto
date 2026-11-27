@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
   CalendarDays,
@@ -15,6 +15,11 @@ export default function Reserva() {
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState("2");
   const [option, setOption] = useState(STAY_OPTIONS[0].id);
+  const [today, setToday] = useState("");
+
+  useEffect(() => {
+    setToday(new Date().toISOString().split("T")[0]);
+  }, []);
 
   const nights = useMemo(() => {
     if (!checkIn || !checkOut) return 0;
@@ -133,7 +138,7 @@ export default function Reserva() {
                       className="field"
                       value={checkIn}
                       onChange={(e) => setCheckIn(e.target.value)}
-                      min={new Date().toISOString().split("T")[0]}
+                      min={today || undefined}
                     />
                   </div>
                   <div>
@@ -146,7 +151,7 @@ export default function Reserva() {
                       className="field"
                       value={checkOut}
                       onChange={(e) => setCheckOut(e.target.value)}
-                      min={checkIn || new Date().toISOString().split("T")[0]}
+                      min={checkIn || today || undefined}
                     />
                   </div>
                 </div>
